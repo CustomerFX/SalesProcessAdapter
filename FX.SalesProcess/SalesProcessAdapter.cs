@@ -72,18 +72,14 @@ namespace FX.SalesProcess
 				auditStage.Name = ProcessPlugin.Name;
 				auditStage.SalesprocessId = salesProcess.Id;
 				auditStage.StageName = stage.Name;
-				auditStage.Stepname = string.Empty;
 				auditStage.Probability = (float)stage.Probability;
 				auditStage.Updateprobability = ProcessPlugin.UpdateOpportunityPercent;
-				auditStage.Status = string.Empty;
 				auditStage.Processtype = "STAGE";
-				auditStage.Actiontype = string.Empty;
 				auditStage.StageOrder = stage.OrderNumber;
 				auditStage.StepOrder = 0;
 				auditStage.Required = "F";
 				auditStage.Completed = "F";
 				auditStage.StageguidId = stage.Id;
-				auditStage.StepguidId = string.Empty;
 				auditStage.NextId = stage.NextId;
 				auditStage.Estdays = stage.EstimatedDays;
 				auditStage.Seq = SequenceNumber;
@@ -114,7 +110,6 @@ namespace FX.SalesProcess
 					auditStep.Stepname = step.Name;
 					auditStep.Probability = stage.Probability;
 					auditStep.Updateprobability = ProcessPlugin.UpdateOpportunityPercent;
-					auditStep.Status = string.Empty;
 					auditStep.Processtype = "STEP";
 					auditStep.StageOrder = stage.OrderNumber;
 					auditStep.StepOrder = step.OrderNumber;
@@ -144,13 +139,9 @@ namespace FX.SalesProcess
 			audit.EntityId = salesProcess.EntityId;
 			audit.Name = salesProcess.Name;
 			audit.SalesprocessId = salesProcess.Id;
-			audit.StageName = string.Empty;
-			audit.Stepname = string.Empty;
 			audit.Probability = 0.0F;
 			audit.Updateprobability = ProcessPlugin.UpdateOpportunityPercent;
-			audit.Status = string.Empty;
 			audit.Processtype = elementType.ToString().ToUpper();
-			audit.Actiontype = string.Empty;
 			audit.StageOrder = 0;
 			audit.StepOrder = 0;
 			audit.Required = "F";
@@ -172,7 +163,6 @@ namespace FX.SalesProcess
 			audit.StageName = stageAudit.Name;
 			audit.Stepname = "No Action";
 			audit.Probability = stageAudit.Probability;
-			audit.Status = string.Empty;
 			audit.Processtype = "STEP";
 			audit.StageOrder = stageAudit.StageOrder;
 			audit.StepOrder = 1;
@@ -180,7 +170,6 @@ namespace FX.SalesProcess
 			audit.StageId = stageAudit.Id;
 			audit.StageguidId = stageAudit.StageguidId;
 			audit.StepguidId = "STEPGUIDID";
-			audit.NextId = string.Empty;
 			audit.Estdays = 0.0F;
 			audit.Required = "F";
 			audit.Inlan = "T";

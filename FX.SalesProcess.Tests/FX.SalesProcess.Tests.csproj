@@ -31,7 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Sublogix">
+    <Reference Include="Sublogix, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\References\Sublogix.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -47,8 +48,8 @@
   <ItemGroup>
     <Compile Include="Global.cs" />
     <Compile Include="ProcessPluginTests.cs" />
-    <Compile Include="SalesProcessAdapterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SalesProcessAdapterTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FX.SalesProcess\FX.SalesProcess.csproj">
