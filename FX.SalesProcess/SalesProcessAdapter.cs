@@ -64,6 +64,10 @@ namespace FX.SalesProcess
 			AddProcessElement(salesProcess, ProcessElementType.Header);
 
 			bool first = true;
+			string firstStageName = string.Empty;
+			int firstStageNumber = 0;
+			float firstStageProbability = 0.0F;
+
 			var stages = ProcessPlugin.GetStages();
 			foreach (var stage in stages)
 			{
@@ -89,6 +93,11 @@ namespace FX.SalesProcess
 				if (first)
 				{
 					first = false;
+					firstStageName = auditStage.Name;
+					if (auditStage.StageOrder.HasValue) firstStageNumber = auditStage.StageOrder.Value;
+
+					UpdateOpportunity(entityId, auditStage.Name, auditStage.StageOrder, (ProcessPlugin.UpdateOpportunityPercent == "T"), auditStage.Probability);
+
 					auditStage.Startdate = DateTime.Now;
 					auditStage.Startedby = UserId;
 					auditStage.IsCurrent = "T";
@@ -179,6 +188,18 @@ namespace FX.SalesProcess
 			audit.Seq = SequenceNumber;
 			audit.Data = Encoding.UTF8.GetBytes("<Action></Action>");
 			audit.Save();
+		}
+
+		private void UpdateOpportunity(string opportunityId, string stageName, int? stageOrder, bool updateProbability, float? probability)
+		{
+			var opp = Repository.GetById<Opportunity>(opportunityId);
+			if (opp == null) return;
+
+			opp.Stage = string.Format("{0}-{1}", (stageOrder.HasValue ? stageOrder.Value : 0), stageName);
+			if (updateProbability)
+				opp.Closeprobability = (int)(probability.HasValue ? probability.Value : 0.0F);
+
+			opp.Save();
 		}
 	}
 }
