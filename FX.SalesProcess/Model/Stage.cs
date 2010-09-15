@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace FX.SalesProcess.Model
 {
-	internal class Stage
+	public class Stage
 	{
 		public Stage()
 		{

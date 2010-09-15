@@ -2,7 +2,7 @@
 
 namespace FX.SalesProcess.Model
 {
-	internal class Step
+	public class Step
 	{
 		public string Id { get; set; }
 		public string Name { get; set; }

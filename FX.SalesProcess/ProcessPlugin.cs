@@ -8,7 +8,7 @@ using FX.SalesProcess.Model;
 
 namespace FX.SalesProcess
 {
-	internal class ProcessPlugin
+	public class ProcessPlugin
 	{
 		public ProcessPlugin(Repository repository, string pluginId)
 		{
@@ -42,11 +42,11 @@ namespace FX.SalesProcess
 			foreach (XmlNode stageNode in stageNodes)
 			{
 				var stage = new Stage();
-				stage.Probability = Convert.ToInt32(stageNode.SelectSingleNode("Probability").InnerText);
-				stage.OrderNumber = Convert.ToInt32(stageNode.SelectSingleNode("OrderNumber").InnerText);
+				stage.Probability = Convert.ToInt32(stageNode.SelectSingleNode("Probability").InnerText ?? "0");
+				stage.OrderNumber = Convert.ToInt32(stageNode.SelectSingleNode("OrderNumber").InnerText ?? "0");
 				stage.Id = stageNode.Attributes.GetNamedItem("ID").InnerText;
 				stage.NextId = stageNode.Attributes.GetNamedItem("NextID").InnerText;
-				stage.EstimatedDays = float.Parse(stageNode.Attributes.GetNamedItem("EstDays").InnerText);
+				stage.EstimatedDays = float.Parse(stageNode.SelectSingleNode("EstDays").InnerText ?? "0");
 				stage.Name = this.Name;
 
 				var stepNodes = stageNode.SelectNodes("Steps/Step");
