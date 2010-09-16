@@ -29,7 +29,7 @@ namespace FX.SalesProcess.Tests
 		public void Can_Get_Update_Opportunity_Percent()
 		{
 			var plugin = new ProcessPlugin(Repository, Global.ProcessPluginId);
-			Assert.Equal("T", plugin.UpdateOpportunityPercent);
+			Assert.Equal(true, plugin.UpdateOpportunityPercent);
 		}
 
 		[Fact]

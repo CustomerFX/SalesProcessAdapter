@@ -26,11 +26,11 @@ namespace FX.SalesProcess
 			}
 		}
 
-		public string UpdateOpportunityPercent
+		public bool UpdateOpportunityPercent
 		{
 			get
 			{
-				return _pluginData.DocumentElement.SelectSingleNode("//SalesProcess/UpdateOppPercent").InnerText;
+				return (_pluginData.DocumentElement.SelectSingleNode("//SalesProcess/UpdateOppPercent").InnerText == "T");
 			}
 		}
 
@@ -58,7 +58,7 @@ namespace FX.SalesProcess
 					step.Id = stepNode.Attributes.GetNamedItem("ID").InnerText;
 					step.NextId = stepNode.Attributes.GetNamedItem("NextID").InnerText;
 					step.EstimatedDays = float.Parse(stepNode.SelectSingleNode("EstDays").InnerText);
-					step.Required = stepNode.SelectSingleNode("Required").InnerText;
+					step.Required = (stepNode.SelectSingleNode("Required").InnerText == "T");
 
 					XmlNode actionNode = stepNode.SelectSingleNode("Action");
 
@@ -67,16 +67,16 @@ namespace FX.SalesProcess
 					switch (step.ActionType.ToLower())
 					{
 						case "form":
-							step.InLan = (actionNode.SelectSingleNode("//FormAction/LanForm/Name").InnerText != string.Empty ? "T" : "F");
-							step.InWeb = (actionNode.SelectSingleNode("//FormAction/WebForm/Name").InnerText != string.Empty ? "T" : "F");
+							step.InLan = (actionNode.SelectSingleNode("//FormAction/LanForm/Name").InnerText != string.Empty);
+							step.InWeb = (actionNode.SelectSingleNode("//FormAction/WebForm/Name").InnerText != string.Empty);
 							break;
 						case "script":
-							step.InLan = (actionNode.SelectSingleNode("//ScriptAction/LanForm/Name").InnerText != string.Empty ? "T" : "F");
-							step.InWeb = (actionNode.SelectSingleNode("//ScriptAction/WebForm/Name").InnerText != string.Empty ? "T" : "F");
+							step.InLan = (actionNode.SelectSingleNode("//ScriptAction/LanForm/Name").InnerText != string.Empty);
+							step.InWeb = (actionNode.SelectSingleNode("//ScriptAction/WebForm/Name").InnerText != string.Empty);
 							break;
 						default:
-							step.InLan = "T";
-							step.InWeb = "T";
+							step.InLan = true;
+							step.InWeb = true;
 							break;
 					}
 

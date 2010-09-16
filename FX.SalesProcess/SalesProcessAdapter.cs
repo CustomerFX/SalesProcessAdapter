@@ -58,16 +58,12 @@ namespace FX.SalesProcess
 			salesProcess.EntityId = entityId;
 			salesProcess.Name = ProcessPlugin.Name;
 			salesProcess.BasedOnId = pluginId;
-			salesProcess.Isactive = "T";
+			salesProcess.Isactive = true;
 			salesProcess.Save();
 
 			AddProcessElement(salesProcess, ProcessElementType.Header);
 
 			bool first = true;
-			string firstStageName = string.Empty;
-			int firstStageNumber = 0;
-			float firstStageProbability = 0.0F;
-
 			var stages = ProcessPlugin.GetStages();
 			foreach (var stage in stages)
 			{
@@ -81,29 +77,26 @@ namespace FX.SalesProcess
 				auditStage.Processtype = "STAGE";
 				auditStage.StageOrder = stage.OrderNumber;
 				auditStage.StepOrder = 0;
-				auditStage.Required = "F";
-				auditStage.Completed = "F";
+				auditStage.Required = false;
+				auditStage.Completed = false;
 				auditStage.StageguidId = stage.Id;
 				auditStage.NextId = stage.NextId;
 				auditStage.Estdays = stage.EstimatedDays;
 				auditStage.Seq = SequenceNumber;
-				auditStage.Inlan = "T";
-				auditStage.Inweb = "T";
+				auditStage.Inlan = true;
+				auditStage.Inweb = true;
 
 				if (first)
 				{
 					first = false;
-					firstStageName = auditStage.Name;
-					if (auditStage.StageOrder.HasValue) firstStageNumber = auditStage.StageOrder.Value;
-
-					UpdateOpportunity(entityId, auditStage.Name, auditStage.StageOrder, (ProcessPlugin.UpdateOpportunityPercent == "T"), auditStage.Probability);
+					UpdateOpportunity(entityId, auditStage.Name, auditStage.StageOrder, ProcessPlugin.UpdateOpportunityPercent, auditStage.Probability);
 
 					auditStage.Startdate = DateTime.Now;
 					auditStage.Startedby = UserId;
-					auditStage.IsCurrent = "T";
+					auditStage.IsCurrent = true;
 				}
 				else
-					auditStage.IsCurrent = "F";
+					auditStage.IsCurrent = false;
 
 				auditStage.Save();
 
@@ -122,7 +115,7 @@ namespace FX.SalesProcess
 					auditStep.Processtype = "STEP";
 					auditStep.StageOrder = stage.OrderNumber;
 					auditStep.StepOrder = step.OrderNumber;
-					auditStep.Completed = "F";
+					auditStep.Completed = false;
 					auditStep.StageId = auditStage.Id;
 					auditStep.StageguidId = stage.Id;
 					auditStep.StepguidId = step.Id;
@@ -153,13 +146,13 @@ namespace FX.SalesProcess
 			audit.Processtype = elementType.ToString().ToUpper();
 			audit.StageOrder = 0;
 			audit.StepOrder = 0;
-			audit.Required = "F";
+			audit.Required = false;
 			audit.Startdate = DateTime.Now;
 			audit.Startedby = UserId;
-			audit.Completed = "F";
+			audit.Completed = false;
 			audit.Seq = SequenceNumber;
-			audit.Inlan = "T";
-			audit.Inweb = "T";
+			audit.Inlan = true;
+			audit.Inweb = true;
 			audit.Save();
 		}
 
@@ -175,16 +168,16 @@ namespace FX.SalesProcess
 			audit.Processtype = "STEP";
 			audit.StageOrder = stageAudit.StageOrder;
 			audit.StepOrder = 1;
-			audit.Completed = "F";
+			audit.Completed = false;
 			audit.StageId = stageAudit.Id;
 			audit.StageguidId = stageAudit.StageguidId;
 			audit.StepguidId = "STEPGUIDID";
 			audit.Estdays = 0.0F;
-			audit.Required = "F";
-			audit.Inlan = "T";
-			audit.Inweb = "T";
+			audit.Required = false;
+			audit.Inlan = true;
+			audit.Inweb = true;
 			audit.Description = stageAudit.Name;
-			audit.IsCurrent = "F";
+			audit.IsCurrent = false;
 			audit.Seq = SequenceNumber;
 			audit.Data = Encoding.UTF8.GetBytes("<Action></Action>");
 			audit.Save();
