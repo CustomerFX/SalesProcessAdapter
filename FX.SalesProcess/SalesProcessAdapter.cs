@@ -52,7 +52,11 @@ namespace FX.SalesProcess
 
 		public void CreateProcess(string pluginId, string entityId)
 		{
-			this.ProcessPlugin = new ProcessPlugin(this.Repository, pluginId);
+			try
+			{
+				this.ProcessPlugin = new ProcessPlugin(this.Repository, pluginId);
+			}
+			catch { throw; }
 
 			var salesProcess = Repository.Create<SalesProcesses>();
 			salesProcess.EntityId = entityId;

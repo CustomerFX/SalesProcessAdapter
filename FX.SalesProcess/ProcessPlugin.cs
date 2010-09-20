@@ -13,7 +13,12 @@ namespace FX.SalesProcess
 		public ProcessPlugin(Repository repository, string pluginId)
 		{
 			this.Repository = repository;
-			LoadPluginData(pluginId);
+
+			try
+			{
+				LoadPluginData(pluginId);
+			}
+			catch { throw; }
 		}
 
 		private Repository Repository { get; set; }
@@ -97,8 +102,12 @@ namespace FX.SalesProcess
 		private XmlDocument _pluginData;
 		private void LoadPluginData(string pluginId)
 		{
+			var plugin = GetPlugin(pluginId);
+			if (plugin == null)
+				throw new Exception(string.Format("The plugin ID {0} does not exist or could not be loaded.", pluginId));
+
 			_pluginData = new XmlDocument();
-			_pluginData.LoadXml(Encoding.UTF8.GetString(GetPlugin(pluginId).Data));
+			_pluginData.LoadXml(Encoding.UTF8.GetString(plugin.Data));
 		}
 
 		private Plugin GetPlugin(string pluginId)
