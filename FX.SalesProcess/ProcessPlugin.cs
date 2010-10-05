@@ -52,7 +52,7 @@ namespace FX.SalesProcess
 				stage.Id = stageNode.Attributes.GetNamedItem("ID").InnerText;
 				stage.NextId = stageNode.Attributes.GetNamedItem("NextID").InnerText;
 				stage.EstimatedDays = float.Parse(stageNode.SelectSingleNode("EstDays").InnerText ?? "0");
-				stage.Name = this.Name;
+				stage.Name = stageNode.SelectSingleNode("Name").InnerText ?? this.Name;
 
 				var stepNodes = stageNode.SelectNodes("Steps/Step");
 				foreach (XmlNode stepNode in stepNodes)
