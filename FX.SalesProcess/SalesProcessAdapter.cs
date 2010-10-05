@@ -74,7 +74,7 @@ namespace FX.SalesProcess
 				var auditStage = Repository.Create<SalesProcessAudit>();
 				auditStage.EntityId = entityId;
 				auditStage.Name = ProcessPlugin.Name;
-				auditStage.SalesprocessId = salesProcess.Id;
+				auditStage.SalesprocessId = salesProcess.SalesprocessesId;
 				auditStage.StageName = stage.Name;
 				auditStage.Probability = (float)stage.Probability;
 				auditStage.Updateprobability = ProcessPlugin.UpdateOpportunityPercent;
@@ -111,7 +111,7 @@ namespace FX.SalesProcess
 					var auditStep = Repository.Create<SalesProcessAudit>();
 					auditStep.EntityId = salesProcess.EntityId;
 					auditStep.Name = ProcessPlugin.Name;
-					auditStep.SalesprocessId = salesProcess.Id;
+					auditStep.SalesprocessId = salesProcess.SalesprocessesId;
 					auditStep.StageName = stage.Name;
 					auditStep.Stepname = step.Name;
 					auditStep.Probability = stage.Probability;
@@ -120,7 +120,7 @@ namespace FX.SalesProcess
 					auditStep.StageOrder = stage.OrderNumber;
 					auditStep.StepOrder = step.OrderNumber;
 					auditStep.Completed = false;
-					auditStep.StageId = auditStage.Id;
+					auditStep.StageId = auditStage.SalesprocessauditId;
 					auditStep.StageguidId = stage.Id;
 					auditStep.StepguidId = step.Id;
 					auditStep.NextId = step.NextId;
@@ -144,7 +144,7 @@ namespace FX.SalesProcess
 			var audit = Repository.Create<SalesProcessAudit>();
 			audit.EntityId = salesProcess.EntityId;
 			audit.Name = salesProcess.Name;
-			audit.SalesprocessId = salesProcess.Id;
+			audit.SalesprocessId = salesProcess.SalesprocessesId;
 			audit.Probability = 0.0F;
 			audit.Updateprobability = ProcessPlugin.UpdateOpportunityPercent;
 			audit.Processtype = elementType.ToString().ToUpper();
@@ -165,7 +165,7 @@ namespace FX.SalesProcess
 			var audit = Repository.Create<SalesProcessAudit>();
 			audit.EntityId = salesProcess.EntityId;
 			audit.Name = salesProcess.Name;
-			audit.SalesprocessId = salesProcess.Id;
+			audit.SalesprocessId = salesProcess.SalesprocessesId;
 			audit.StageName = stageAudit.Name;
 			audit.Stepname = "No Action";
 			audit.Probability = stageAudit.Probability;
@@ -173,7 +173,7 @@ namespace FX.SalesProcess
 			audit.StageOrder = stageAudit.StageOrder;
 			audit.StepOrder = 1;
 			audit.Completed = false;
-			audit.StageId = stageAudit.Id;
+			audit.StageId = stageAudit.SalesprocessauditId;
 			audit.StageguidId = stageAudit.StageguidId;
 			audit.StepguidId = "STEPGUIDID";
 			audit.Estdays = 0.0F;

@@ -21,11 +21,11 @@ namespace FX.SalesProcess.Tests
 
 		private void ProcessCleanup()
 		{
-			var procList = Repository.Find<SalesProcesses>("EntityID", Global.OpportunityId);
+			var procList = Repository.Find<SalesProcesses>(x => x.EntityId == Global.OpportunityId);
 			foreach (var proc in procList)
 				proc.Delete();
 
-			var auditList = Repository.Find<SalesProcessAudit>("EntityID", Global.OpportunityId);
+			var auditList = Repository.Find<SalesProcessAudit>(x => x.EntityId == Global.OpportunityId);
 			foreach (var audit in auditList)
 				audit.Delete();
 		}
