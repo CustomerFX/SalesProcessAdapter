@@ -50,7 +50,7 @@ namespace FX.SalesProcess
 			}
 		}
 
-		public void CreateProcess(string pluginId, string entityId)
+		public string CreateProcess(string pluginId, string entityId)
 		{
 			try
 			{
@@ -137,6 +137,8 @@ namespace FX.SalesProcess
 			}
 
 			AddProcessElement(salesProcess, ProcessElementType.Footer);
+
+			return salesProcess.SalesprocessesId;
 		}
 
 		private void AddProcessElement(SalesProcesses salesProcess, ProcessElementType elementType)

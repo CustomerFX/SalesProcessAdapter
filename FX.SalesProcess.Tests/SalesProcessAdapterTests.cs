@@ -38,5 +38,15 @@ namespace FX.SalesProcess.Tests
 
 			ProcessCleanup();
 		}
+
+		[Fact] // integration test
+		public void Can_Return_Sales_Process_Id()
+		{
+			var adapter = new SalesProcessAdapter(Repository);
+			string id = adapter.CreateProcess(Global.ProcessPluginId, Global.OpportunityId);
+			Assert.Equal(true, !string.IsNullOrEmpty(id));
+
+			ProcessCleanup();
+		}
 	}
 }
