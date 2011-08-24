@@ -1,0 +1,30 @@
+<#+
+/*
+	Sublogix - Simple Repository for SalesLogix
+	-------------------------------------------
+	Customer FX Corporation
+	customerfx.com
+*/
+
+
+	// Enter the following SalesLogix connection 
+	// values below:
+	
+	const string Server = "localhost";
+	const string Connection = "saleslogix_eval";
+	const string UserName = "admin";
+	const string Password = "";
+	
+	
+	// Optionally enter a namespace for the created
+	// entity model
+	const string Namespace = "Sublogix.CustomEntities";
+	
+	// Optionally use display names for classes. If you 
+	// use this option, display names for tables will 
+	// be used to create classes instead of table names.
+	// There can be some issues with this option, 
+	// especially with international databases.
+	const bool UseDisplayNames = false;
+
+#>
