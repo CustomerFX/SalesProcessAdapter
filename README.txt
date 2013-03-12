@@ -19,5 +19,4 @@ var procAdapter = new SalesProcessAdapter(ConnectionString);
 procAdapter.CreateProcess(oppId, pluginId);
 
 
-For issues or questions see Ryan Farley
 
