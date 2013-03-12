@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Xunit;
-using FX.SalesProcess;
-using FX.SalesProcess.Model;
+﻿using Xunit;
 using Sublogix;
 using Sublogix.Entities;
 
@@ -16,7 +10,7 @@ namespace FX.SalesProcess.Tests
 
 		public SalesProcessAdapterTests()
 		{
-			this.Repository = new Repository(Global.ConnectionString);
+			Repository = new Repository(Global.ConnectionString);
 		}
 
 		private void ProcessCleanup()

@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using Xunit;
-using FX.SalesProcess;
-using FX.SalesProcess.Model;
 using Sublogix;
 
 namespace FX.SalesProcess.Tests
@@ -15,11 +10,11 @@ namespace FX.SalesProcess.Tests
 
 		public ProcessPluginTests()
 		{
-			this.Repository = new Repository(Global.ConnectionString);
+			Repository = new Repository(Global.ConnectionString);
 		}
 
 		[Fact]
-		public void Can_Get_ProcessName()
+		public void Can_Get_Process_Name()
 		{
 			var plugin = new ProcessPlugin(Repository, Global.ProcessPluginId);
 			Assert.Equal("New Technology SMB", plugin.Name);

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using Sublogix;
 using Sublogix.Entities;
@@ -15,14 +13,14 @@ namespace FX.SalesProcess
 
 	public class SalesProcessAdapter
 	{
-		public SalesProcessAdapter(string ConnectionString)
+		public SalesProcessAdapter(string connectionString)
 		{
-			this.Repository = new Repository(ConnectionString);
+			Repository = new Repository(connectionString);
 		}
 
-		public SalesProcessAdapter(Repository Repository)
+		public SalesProcessAdapter(Repository repository)
 		{
-			this.Repository = Repository;
+			Repository = repository;
 		}
 
 		private Repository Repository { get; set; }
@@ -50,13 +48,14 @@ namespace FX.SalesProcess
 			}
 		}
 
+		public ProcessPlugin GetProcess(string pluginId)
+		{
+			return new ProcessPlugin(Repository, pluginId);
+		}
+
 		public string CreateProcess(string pluginId, string entityId)
 		{
-			try
-			{
-				this.ProcessPlugin = new ProcessPlugin(this.Repository, pluginId);
-			}
-			catch { throw; }
+			ProcessPlugin = new ProcessPlugin(Repository, pluginId);
 
 			var salesProcess = Repository.Create<Salesprocesses>();
 			salesProcess.EntityId = entityId;

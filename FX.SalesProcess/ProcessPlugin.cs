@@ -12,13 +12,8 @@ namespace FX.SalesProcess
 	{
 		public ProcessPlugin(Repository repository, string pluginId)
 		{
-			this.Repository = repository;
-
-			try
-			{
-				LoadPluginData(pluginId);
-			}
-			catch { throw; }
+			Repository = repository;
+			LoadPluginData(pluginId);
 		}
 
 		private Repository Repository { get; set; }
@@ -42,6 +37,9 @@ namespace FX.SalesProcess
 		public List<Stage> GetStages()
 		{
 			var stages = new List<Stage>();
+
+			if (_pluginData.DocumentElement == null)
+				return stages;
 
 			var stageNodes = _pluginData.DocumentElement.SelectNodes("//SalesProcess/Stages/Stage");
 			foreach (XmlNode stageNode in stageNodes)
