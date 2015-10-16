@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Customer FX Corporation")]
 [assembly: AssemblyProduct("SalesProcessAdapter")]
-[assembly: AssemblyCopyright("Copyright © Customer FX Corporation 2011")]
+[assembly: AssemblyCopyright("Copyright © Customer FX Corporation 2011-2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
